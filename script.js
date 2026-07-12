@@ -69,14 +69,57 @@ go(0);
 const dateInput=$('input[type="date"]');
 dateInput.min=new Date().toISOString().split('T')[0];
 
+const WHATSAPP_NUMBER = "918668423088";
+
 $('#appointmentForm').addEventListener('submit',e=>{
   e.preventDefault();
+  const form = e.target;
+  
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+  
   const btn=$('.submit-btn'), original=btn.innerHTML;
-  btn.disabled=true;btn.innerHTML='<span>Request sent successfully</span><i class="fa-solid fa-check"></i>';
-  $('.toast').classList.add('show');
-  setTimeout(()=>{
-    $('.toast').classList.remove('show');btn.disabled=false;btn.innerHTML=original;e.target.reset();dateInput.min=new Date().toISOString().split('T')[0];
-  },3500);
+  btn.disabled=true;
+
+  const formData = new FormData(form);
+  const name = formData.get('name') ? formData.get('name').trim() : '';
+  const phone = formData.get('phone') ? formData.get('phone').trim() : '';
+  const department = formData.get('department') ? formData.get('department').trim() : '';
+  const date = formData.get('date') ? formData.get('date').trim() : '';
+  const message = formData.get('message') ? formData.get('message').trim() : '';
+
+  let whatsappText = `*🏥 New Appointment Request*\n\n`;
+  whatsappText += `👤 Full Name: ${name}\n`;
+  whatsappText += `📞 Mobile Number: ${phone}\n`;
+  if (department) whatsappText += `🏥 Department: ${department}\n`;
+  if (date) whatsappText += `📅 Preferred Date: ${date}\n`;
+  if (message) whatsappText += `\n📝 Message:\n${message}\n`;
+  whatsappText += `\nSubmitted from Alexis Hospital Website`;
+
+  const encodedMessage = encodeURIComponent(whatsappText);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+  try {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = whatsappUrl;
+    } else {
+      window.open(whatsappUrl, '_blank');
+    }
+    
+    $('.toast').classList.add('show');
+    setTimeout(()=>{
+      $('.toast').classList.remove('show');
+      btn.disabled=false;
+      form.reset();
+      dateInput.min=new Date().toISOString().split('T')[0];
+    },3500);
+  } catch (err) {
+    alert("Unable to open WhatsApp. Please try again or contact us directly.");
+    btn.disabled=false;
+  }
 });
 
 document.addEventListener('keydown',e=>{
