@@ -1,0 +1,440 @@
+/* ===================================================
+   Diabetes Management — Service Detail Page
+   Extends the main Alexis Hospital style.css
+   =================================================== */
+
+/* ---------- PAGE HEADER / BREADCRUMB ---------- */
+.dm-page-header {
+  position: relative;
+  padding: 55px 0 60px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%);
+  overflow: hidden;
+}
+.dm-header-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 30%, rgba(144,39,117,.06) 0, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(255,204,0,.06) 0, transparent 35%);
+}
+.dm-header-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.dm-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.dm-breadcrumb a {
+  color: var(--muted);
+  transition: color .3s;
+}
+.dm-breadcrumb a:hover {
+  color: #902775;
+}
+.dm-breadcrumb i {
+  font-size: 8px;
+  color: #bbb;
+}
+.dm-breadcrumb span {
+  color: #902775;
+  font-weight: 800;
+}
+.dm-page-header h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: -2px;
+  color: var(--navy);
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+.dm-page-header h1 span {
+  color: #902775;
+}
+.dm-page-header p {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ---------- MAIN TWO-COLUMN GRID ---------- */
+.dm-main {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+.dm-grid {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ---------- LEFT COLUMN — FORM CARD ---------- */
+.dm-left .appointment-card {
+  position: sticky;
+  top: 130px;
+  background: var(--primary-gradient);
+  background-size: 200% 200%;
+  background-position: 0 50%;
+}
+.dm-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+  margin-top: 22px;
+}
+.dm-card-grid .dm-info-card {
+  height: 100%;
+}
+.dm-left .form-head h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px;
+  letter-spacing: -.5px;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+.dm-left .form-head p {
+  font-size: 11px;
+  color: rgba(255,255,255,.78);
+}
+.dm-left label {
+  color: #FFFFFF;
+}
+.dm-left label > span,
+.dm-left label .req {
+  color: rgba(255,255,255,.8);
+}
+.dm-left label .req {
+  font-weight: 400;
+}
+.dm-left input[readonly] {
+  background: #F8F9FA;
+  color: #902775;
+  font-weight: 700;
+  cursor: default;
+}
+.dm-left input,
+.dm-left select,
+.dm-left textarea {
+  background: #FFFFFF;
+  color: var(--ink);
+  border-color: rgba(255,255,255,.72);
+  padding: 11px 13px;
+}
+.dm-left input:focus,
+.dm-left select:focus,
+.dm-left textarea:focus {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.24);
+}
+.dm-left .submit-btn {
+  background: #0F766E;
+  box-shadow: 0 10px 24px rgba(7,89,82,.28);
+  color: #FFFFFF;
+}
+.dm-left .submit-btn:hover {
+  background: #115E59;
+  box-shadow: 0 14px 28px rgba(7,89,82,.38);
+}
+.dm-left .privacy-note,
+.dm-left .privacy-note i {
+  color: rgba(255,255,255,.82);
+}
+
+/* Consent checkbox */
+.dm-consent {
+  margin: 10px 0 18px;
+}
+.dm-checkbox-label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+.dm-checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0F766E;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+/* ---------- RIGHT COLUMN — INFO PANEL ---------- */
+.dm-right {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+/* Hero Image */
+.dm-hero-image {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(144,39,117,.10);
+  position: relative;
+}
+.dm-hero-image img {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+.dm-hero-image:hover img {
+  transform: scale(1.04);
+}
+
+/* Info Cards */
+.dm-info-card {
+  background: #fff;
+  border: 1px solid #E5E5E5;
+  border-radius: var(--radius);
+  padding: 26px;
+  transition: box-shadow .35s, transform .35s, border-color .35s;
+  position: relative;
+  overflow: hidden;
+}
+.dm-info-card.dm-symptoms,
+.dm-info-card.dm-treatment {
+  background: #F8F9FB;
+}
+.dm-info-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 4px;
+  background: var(--primary-gradient);
+  border-radius: 4px 0 0 4px;
+  opacity: 0;
+  transition: opacity .35s;
+}
+.dm-info-card:hover {
+  box-shadow: 0 14px 35px rgba(144,39,117,.10);
+  transform: translateY(-4px);
+  border-color: transparent;
+}
+.dm-info-card:hover::before {
+  opacity: 1;
+}
+.dm-info-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  background: var(--accent-gradient);
+  color: #212529;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.dm-info-card h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.dm-info-card h3 > i {
+  color: #902775;
+  font-size: 16px;
+}
+.dm-info-card > p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.85;
+}
+.dm-info-card > p strong {
+  color: #902775;
+  font-weight: 700;
+}
+.dm-info-card.dm-about {
+  background: var(--accent-gradient);
+  background-size: 200% 200%;
+  background-position: 0 50%;
+}
+.dm-info-card.dm-about h3 {
+  color: #212529;
+}
+.dm-info-card.dm-about > p {
+  color: #343A40;
+}
+.dm-info-card.dm-about > p strong {
+  color: #212529;
+}
+
+/* Icon Lists (Symptoms, Treatment, Why Choose) */
+.dm-icon-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.dm-icon-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #F8F9FA;
+  border-radius: 12px;
+  transition: background .3s, transform .3s;
+}
+.dm-icon-item:hover {
+  background: #FFF8E1;
+  transform: translateX(4px);
+}
+.dm-item-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent-gradient);
+  color: #212529;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.dm-icon-item > span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* Bullet List (When to Consult) */
+.dm-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.dm-bullet-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  padding: 9px 13px;
+  background: #F8F9FA;
+  border-radius: 11px;
+  transition: background .3s, transform .3s;
+}
+.dm-bullet-list li:hover {
+  background: #FFF8E1;
+  transform: translateX(4px);
+}
+.dm-bullet-list li i {
+  color: #902775;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ---------- BACK TO SERVICES SECTION ---------- */
+.dm-back-section {
+  padding: 30px 0 70px;
+}
+.dm-back-btn {
+  padding: 16px 32px;
+  font-size: 14px;
+}
+
+/* ---------- FORM VALIDATION STYLES ---------- */
+.dm-field-error {
+  border-color: #E74C3C !important;
+  box-shadow: 0 0 0 3px rgba(231,76,60,.12) !important;
+}
+.dm-error-text {
+  color: #E74C3C;
+  font-size: 9px;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.dm-page-header a:focus-visible,
+.dm-back-btn:focus-visible,
+.dm-checkbox-label input:focus-visible {
+  outline: 3px solid rgba(144,39,117,.35);
+  outline-offset: 3px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1080px) {
+  .dm-grid {
+    grid-template-columns: 1.1fr .9fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .dm-page-header {
+    padding: 40px 0 45px;
+  }
+  .dm-page-header h1 {
+    font-size: 34px;
+  }
+  .dm-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .dm-left .appointment-card {
+    position: static;
+  }
+  .dm-icon-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* A form taller than the viewport must remain fully scrollable. */
+@media (max-height: 900px) and (min-width: 801px) {
+  .dm-left .appointment-card {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .dm-page-header {
+    padding: 32px 0 35px;
+  }
+  .dm-breadcrumb {
+    font-size: 10px;
+    gap: 7px;
+  }
+  .dm-page-header h1 {
+    font-size: 28px;
+    letter-spacing: -1.2px;
+  }
+  .dm-page-header p {
+    font-size: 13px;
+  }
+  .dm-hero-image img {
+    height: 200px;
+  }
+  .dm-info-card {
+    padding: 20px 16px;
+  }
+  .dm-icon-list {
+    grid-template-columns: 1fr;
+  }
+  .dm-card-grid {
+    grid-template-columns: 1fr;
+  }
+  .dm-back-btn {
+    width: 100%;
+  }
+}
