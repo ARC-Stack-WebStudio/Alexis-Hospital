@@ -55,12 +55,20 @@ slides.forEach((_,i)=>{
   b.addEventListener('click',()=>go(i));
   dots.appendChild(b);
 });
-function go(i){
-  slide=(i+slides.length)%slides.length;
-  track.style.transform=`translateX(-${slide*100}%)`;
-  $$('.slider-dots button').forEach((d,n)=>d.classList.toggle('active',n===slide));
-  slides.forEach((s,n)=>s.classList.toggle('active',n===slide));
-  clearInterval(auto);auto=setInterval(()=>go(slide+1),6000);
+  const INTERVAL_MS = 8000;
+  function go(i){
+    slide = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${slide * 100}%)`;
+    $$('.slider-dots button').forEach((d, n) => d.classList.toggle('active', n === slide));
+    slides.forEach((s, n) => s.classList.toggle('active', n === slide));
+    clearInterval(auto);
+    auto = setInterval(() => go(slide + 1), INTERVAL_MS);
+  }
+  // Pause/resume on hover over the testimonial viewport
+  const viewport = document.querySelector('.testimonial-viewport') || document.querySelector('.testimonial-shell');
+  if (viewport) {
+    viewport.addEventListener('mouseenter', () => { if (auto) clearInterval(auto); });
+    viewport.addEventListener('mouseleave', () => { if (auto) clearInterval(auto); auto = setInterval(() => go(slide + 1), INTERVAL_MS); });
 }
 $('.slider-btn.prev').addEventListener('click',()=>go(slide-1));
 $('.slider-btn.next').addEventListener('click',()=>go(slide+1));
