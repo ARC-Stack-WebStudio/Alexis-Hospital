@@ -1,0 +1,62 @@
+PREMIUM COSMETOLOGY HERO IMAGE - GENERATION PROMPT
+====================================================
+
+USE THIS PROMPT WITH ANY IMAGE GENERATION SERVICE:
+
+Ultra-realistic 4K professional photograph of a luxury modern cosmetology clinic consultation room. 
+A beautiful professional female cosmetologist is examining and consulting with a young female patient about facial skin treatments. 
+The cosmetologist is carefully inspecting the patient's face with professional expertise. 
+Modern advanced laser treatment equipment visible in the background with glowing soft lights. 
+Digital skin analysis display screen showing detailed skin assessment in the clinic. 
+Luxury clinic interior with clean white walls, soft purple and rose gold accents, and premium medical aesthetics. 
+The patient has healthy glowing skin and appears confident and relaxed. 
+Professional studio lighting with soft depth of field, premium healthcare branding aesthetic. 
+High-end medical spa atmosphere, luxury skincare clinic environment. 
+No text, logos, or watermarks. No cartoon style. Natural skin tones and realistic faces. 
+Professional medical aesthetic setting, elegant and sophisticated.
+
+
+SERVICES THAT WORK GREAT FOR THIS:
+====================================================
+
+1. DALL-E 3 (OpenAI) - Highest quality
+   - Website: https://openai.com/dall-e-3/
+   - Quality: Excellent for professional medical imagery
+   - Cost: Pay per image (~$0.08-0.12 per generation)
+
+2. Midjourney - Professional grade
+   - Website: https://www.midjourney.com/
+   - Quality: Excellent for aesthetic/luxury images
+   - Cost: Subscription ($10-120/month)
+
+3. Stable Diffusion (Free Online)
+   - Website: https://huggingface.co/spaces/stabilityai/stable-diffusion-3
+   - Quality: Good for medical imagery
+   - Cost: Free
+   - Pro: https://www.stabilityai.com/ (Premium models)
+
+4. Adobe Firefly
+   - Website: https://www.adobe.com/products/firefly/
+   - Quality: Very good
+   - Cost: Free tier or Creative Cloud subscription
+
+
+RECOMMENDED STEPS:
+====================================================
+
+1. Go to one of the services above
+2. Paste the prompt provided above
+3. Specify image size: 1024x1024 pixels (or similar)
+4. Generate the image
+5. Download it as PNG
+6. Save it as: img/Enhanced img.png in your project folder
+7. Done! The cosmetology.html already references this file
+
+
+IMAGE SPECIFICATIONS:
+====================================================
+Filename: Enhanced img.png
+Folder: img/
+Format: PNG
+Size: 1024x1024 pixels or similar landscape ratio
+Quality: 4K/Ultra HD

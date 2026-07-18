@@ -72,7 +72,7 @@ function sendWhatsAppMessage(event) {
     return;
   }
 
-  const whatsappNumber = '918668423088';
+  const whatsappNumber = '918080697661';
   const encodedMessage = encodeURIComponent(
     `*Alexis Hospital — Cosmetology Appointment Request*\n\n` +
     `Name: ${fullName}\n` +
