@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Diabetes Management at Alexis Hospital, Bhiwandi — comprehensive blood sugar monitoring, diet counseling, insulin therapy, and personalized long-term care.">
+  <meta name="theme-color" content="#902775">
+  <title>Diabetes Management | Alexis Hospital — Bhiwandi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="diabetes-management.css">
+  <script src="diabetes-management.js" defer></script>
+</head>
+<body>
+  <div class="loader" aria-hidden="true"><div class="loader-mark"><img src="img/logo.png" alt="Loading" style="height: 48px; width: auto;"></div></div>
+  <div class="scroll-progress"></div>
+
+  <header class="site-header">
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <span><i class="fa-solid fa-location-dot"></i> V.P. Naka, Bhiwandi, Thane</span>
+        <div><span><i class="fa-regular fa-clock"></i> Open 24 hours</span><a href="mailto:alexishospitalbhiwandi@gmail.com"><i class="fa-regular fa-envelope"></i> Email us</a></div>
+      </div>
+    </div>
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="logo" href="index.html" aria-label="Alexis Hospital home">
+        <img src="img/logo.png" alt="Alexis Hospital Logo" style="height: 42px; width: auto;">
+      </a>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#doctors">Doctors</a>
+        <a href="index.html#services" class="active">Services</a><a href="index.html#facilities">Facilities</a><a href="index.html#insurance">Insurance</a>
+        <a href="index.html#testimonials">Testimonials</a><a href="index.html#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-emergency btn-small" href="tel:+918668423088"><i class="fa-solid fa-phone"></i><span>Emergency Call</span></a>
+        <a class="btn btn-primary btn-small desktop-appointment" href="#dm-appointment"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Page Header / Breadcrumb -->
+    <section class="dm-page-header">
+      <div class="dm-header-bg"></div>
+      <div class="container dm-header-content reveal">
+        <nav class="dm-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <a href="index.html#services">Services</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span>Diabetes Management</span>
+        </nav>
+        <h1>Diabetes <span>Management</span></h1>
+        <p>Comprehensive diabetes care focused on prevention, diagnosis, treatment, and long-term management to help patients lead healthier lives.</p>
+      </div>
+    </section>
+
+    <!-- Main Two-Column Layout -->
+    <section class="section dm-main" id="dm-appointment">
+      <div class="container dm-grid">
+
+        <!-- LEFT COLUMN — Appointment Form -->
+        <div class="dm-left">
+          <div class="appointment-card reveal">
+            <div class="form-head">
+              <span><i class="fa-regular fa-calendar-check"></i></span>
+              <div>
+                <h2>Book an Appointment</h2>
+                <p>Fill out the form and our team will contact you shortly.</p>
+              </div>
+            </div>
+
+            <form id="dmAppointmentForm" novalidate>
+              <div class="form-row">
+                <label>Patient Full Name * 
+                  <input type="text" name="name" id="dm-name" placeholder="Enter your full name" required>
+                </label>
+                <label>Mobile Number *
+                  <input type="tel" name="phone" id="dm-phone" placeholder="+91 00000 00000" pattern="[0-9+() -]{10,}" required>
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>Email Address 
+                  <input type="email" name="email" id="dm-email" placeholder="your@email.com">
+                </label>
+                <label>Age *
+                  <input type="number" name="age" id="dm-age" placeholder="e.g. 45" min="1" max="120" required>
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>Gender
+                  <select name="gender" id="dm-gender">
+                    <option value="">Select gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>Department 
+                  <input type="text" name="department" id="dm-department" value="Diabetes Management" readonly required>
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>Doctor Preference
+                  <select name="doctor" id="dm-doctor">
+                    <option value="Any Available Doctor">Any Available Doctor</option>
+                    <option>Dr. Ganesh Ahire</option>
+                  </select>
+                </label>
+                <label>Preferred Appointment Date *
+                  <input type="date" name="date" id="dm-date" required>
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>Already Diagnosed?
+                  <select name="diagnosed" id="dm-diagnosed">
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </label>
+                <label>How did you hear about us?
+                  <select name="source" id="dm-source">
+                    <option value="">Select</option>
+                    <option>Google</option>
+                    <option>Instagram</option>
+                    <option>Facebook</option>
+                    <option>Friend</option>
+                    <option>Existing Patient</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="dm-consent">
+                <label class="dm-checkbox-label">
+                  <input type="checkbox" name="consent" id="dm-consent">
+                  <span>I consent to the Privacy Policy.</span>
+                </label>
+              </div>
+
+              <button class="btn btn-primary submit-btn" type="submit" id="dm-submit">
+                <span>Request Appointment</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <p class="privacy-note"><i class="fa-solid fa-lock"></i> Your information is private and secure.</p>
+            </form>
+          </div>
+
+          <!-- Why Choose Alexis Hospital -->
+          <div class="dm-info-card dm-why-choose reveal">
+            <h3><i class="fa-solid fa-award"></i> Why Choose Alexis Hospital</h3>
+            <div class="dm-icon-list">
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-user-doctor"></i></span>
+                <span>Experienced Specialists</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-microscope"></i></span>
+                <span>Modern Equipment</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-clipboard-list"></i></span>
+                <span>Personalized Treatment</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                <span>Affordable Care</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-truck-medical"></i></span>
+                <span>Emergency Support</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-hand-holding-heart"></i></span>
+                <span>Patient-Centered Approach</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Our Treatment Includes -->
+          <div class="dm-info-card dm-treatment reveal">
+            <h3><i class="fa-solid fa-heart-pulse"></i> Our Treatment Includes</h3>
+            <div class="dm-icon-list">
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-vial"></i></span>
+                <span>Blood Sugar Monitoring</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-apple-whole"></i></span>
+                <span>Diet Counseling</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-pills"></i></span>
+                <span>Medication Management</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-syringe"></i></span>
+                <span>Insulin Therapy</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-person-walking"></i></span>
+                <span>Lifestyle Guidance</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-calendar-check"></i></span>
+                <span>Regular Follow-up</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN — Info Panel -->
+        <div class="dm-right">
+
+          <!-- Hero Image -->
+          <div class="dm-hero-image reveal">
+            <img src="img/diabetes-management.jpg" alt="Doctor checking blood sugar levels for diabetes management at Alexis Hospital" fetchpriority="high">
+          </div>
+
+          <!-- About Diabetes Management -->
+          <div class="dm-info-card dm-about reveal">
+            <div class="dm-info-icon"><i class="fa-solid fa-droplet"></i></div>
+            <h3>About Diabetes Management</h3>
+            <p>Diabetes is a chronic metabolic condition that requires continuous care and attention. At Alexis Hospital, our dedicated team provides comprehensive diabetes management including regular <strong>blood sugar monitoring</strong>, <strong>lifestyle modification guidance</strong>, and <strong>personalised treatment plans</strong>. We focus on preventive care to reduce the risk of complications, offer dietary counselling, and ensure long-term management strategies that empower patients to take control of their health and lead productive, fulfilling lives.</p>
+          </div>
+
+          <!-- Common Symptoms -->
+          <div class="dm-info-card dm-symptoms reveal">
+            <h3><i class="fa-solid fa-stethoscope"></i> Common Symptoms</h3>
+            <div class="dm-icon-list">
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-droplet"></i></span>
+                <span>Frequent urination</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-glass-water"></i></span>
+                <span>Excessive thirst</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-battery-quarter"></i></span>
+                <span>Fatigue</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-eye"></i></span>
+                <span>Blurred vision</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-bandage"></i></span>
+                <span>Slow wound healing</span>
+              </div>
+              <div class="dm-icon-item">
+                <span class="dm-item-icon"><i class="fa-solid fa-weight-scale"></i></span>
+                <span>Weight changes</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- When to Consult a Doctor -->
+          <div class="dm-info-card dm-consult reveal">
+            <h3><i class="fa-solid fa-user-doctor"></i> When to Consult a Doctor</h3>
+            <ul class="dm-bullet-list">
+              <li><i class="fa-solid fa-circle-check"></i> Persistent high blood sugar</li>
+              <li><i class="fa-solid fa-circle-check"></i> Sudden weight loss</li>
+              <li><i class="fa-solid fa-circle-check"></i> Frequent infections</li>
+              <li><i class="fa-solid fa-circle-check"></i> Dizziness</li>
+              <li><i class="fa-solid fa-circle-check"></i> Vision changes</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container dm-card-grid" aria-label="Diabetes management information">
+      </div>
+    </section>
+
+    <!-- Back to Services Button -->
+    <section class="dm-back-section">
+      <div class="container" style="text-align:center;">
+        <a class="btn btn-primary dm-back-btn" href="index.html#services">
+          <i class="fa-solid fa-arrow-left"></i> Back to Services
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a class="logo light-logo" href="index.html"><img src="img/logo.png" alt="Alexis Hospital Logo" style="height: 42px; width: auto;"></a><p>Dependable emergency, critical and multi-speciality care for Bhiwandi and nearby communities.</p><div class="socials"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/918668423088" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div>
+      <div><h4>Quick Links</h4><a href="index.html#about">About Hospital</a><a href="index.html#doctors">Our Doctors</a><a href="index.html#facilities">Facilities</a><a href="index.html#insurance">Insurance Support</a><a href="index.html#contact">Contact Us</a></div>
+      <div><h4>Our Services</h4><a href="index.html#services">Emergency Care</a><a href="index.html#services">Critical Care ICU</a><a href="index.html#services">NICU</a><a href="index.html#services">General Medicine</a><a href="diabetes-management.html">Diabetes Care</a></div>
+      <div class="footer-emergency"><h4>Emergency Helpline</h4><a class="footer-phone" href="tel:+918668423088"><i class="fa-solid fa-phone-volume"></i><span><small>Available 24 hours</small>+91 86684 23088</span></a><p><i class="fa-solid fa-location-dot"></i> V.P. Naka, Bhiwandi,<br>Thane – 421302</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> Alexis Hospital & Critical Care Centre. All rights reserved.</span><span>Healthcare with skill, safety and compassion.</span></div>
+  </footer>
+
+  <a class="floating whatsapp" href="https://wa.me/918668423088?text=Hello%20Alexis%20Hospital%2C%20I%20need%20assistance%20regarding%20Diabetes%20Management." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+  <a class="floating emergency-float" href="tel:+918668423088" aria-label="Call emergency"><i class="fa-solid fa-phone"></i><span>Emergency</span></a>
+  <button class="back-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <div class="toast" role="status"><i class="fa-solid fa-circle-check"></i><div><strong>Appointment request sent</strong><span>Opening WhatsApp with your details.</span></div></div>
+</body>
+</html>

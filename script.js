@@ -55,12 +55,20 @@ slides.forEach((_,i)=>{
   b.addEventListener('click',()=>go(i));
   dots.appendChild(b);
 });
-function go(i){
-  slide=(i+slides.length)%slides.length;
-  track.style.transform=`translateX(-${slide*100}%)`;
-  $$('.slider-dots button').forEach((d,n)=>d.classList.toggle('active',n===slide));
-  slides.forEach((s,n)=>s.classList.toggle('active',n===slide));
-  clearInterval(auto);auto=setInterval(()=>go(slide+1),6000);
+  const INTERVAL_MS = 8000;
+  function go(i){
+    slide = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${slide * 100}%)`;
+    $$('.slider-dots button').forEach((d, n) => d.classList.toggle('active', n === slide));
+    slides.forEach((s, n) => s.classList.toggle('active', n === slide));
+    clearInterval(auto);
+    auto = setInterval(() => go(slide + 1), INTERVAL_MS);
+  }
+  // Pause/resume on hover over the testimonial viewport
+  const viewport = document.querySelector('.testimonial-viewport') || document.querySelector('.testimonial-shell');
+  if (viewport) {
+    viewport.addEventListener('mouseenter', () => { if (auto) clearInterval(auto); });
+    viewport.addEventListener('mouseleave', () => { if (auto) clearInterval(auto); auto = setInterval(() => go(slide + 1), INTERVAL_MS); });
 }
 $('.slider-btn.prev').addEventListener('click',()=>go(slide-1));
 $('.slider-btn.next').addEventListener('click',()=>go(slide+1));
@@ -127,3 +135,52 @@ document.addEventListener('keydown',e=>{
     menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');
   }
 });
+
+// Patient testimonial videos stay in an on-site modal; Instagram is only opened from the profile action.
+const videoModal=$('#patientVideoModal');
+if(videoModal){
+  const videoPlayer=$('#patientVideoPlayer');
+  const modalTitle=$('#patientVideoModalTitle');
+  const modalDescription=$('#patientVideoDescription');
+  const speedControl=$('#patientVideoSpeed');
+  const fullscreenControl=$('#patientVideoFullscreen');
+  let videoTrigger=null;
+  const closePatientVideo=()=>{
+    videoPlayer.pause();
+    videoPlayer.removeAttribute('src');
+    videoPlayer.load();
+    videoModal.classList.remove('is-open');
+    videoModal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('video-modal-open');
+    if(videoTrigger) videoTrigger.focus();
+  };
+  const openPatientVideo=frame=>{
+    const card=frame.closest('.patient-video-card');
+    const title=card.querySelector('h3').textContent;
+    videoTrigger=frame;
+    modalTitle.textContent=title;
+    modalDescription.textContent=frame.dataset.videoDescription;
+    videoPlayer.src=frame.dataset.videoSrc;
+    videoPlayer.playbackRate=1;
+    speedControl.value='1';
+    videoModal.classList.add('is-open');
+    videoModal.setAttribute('aria-hidden','false');
+    document.body.classList.add('video-modal-open');
+    videoPlayer.play().catch(()=>{});
+    $('.patient-video-modal__close',videoModal).focus();
+  };
+  $$('.patient-video-frame[data-video-src]').forEach(frame=>{
+    frame.addEventListener('click',()=>openPatientVideo(frame));
+    frame.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openPatientVideo(frame); }
+    });
+  });
+  speedControl.addEventListener('change',()=>{ videoPlayer.playbackRate=Number(speedControl.value); });
+  fullscreenControl.addEventListener('click',()=>{
+    const fullscreenTarget=videoPlayer;
+    if(document.fullscreenElement) document.exitFullscreen();
+    else if(fullscreenTarget.requestFullscreen) fullscreenTarget.requestFullscreen();
+  });
+  $$('[data-modal-close]',videoModal).forEach(control=>control.addEventListener('click',closePatientVideo));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&videoModal.classList.contains('is-open')) closePatientVideo(); });
+}
