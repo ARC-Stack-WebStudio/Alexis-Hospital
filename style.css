@@ -3606,3 +3606,77 @@ h2 span,
 .action-card:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
+/* Full-screen landing-page video background */
+.hero {
+  min-height: max(600px, 100vh);
+  background: #0a213d url("img/Receptionist img.png") center / cover no-repeat;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+.hero-bg {
+  z-index: 1;
+  opacity: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(4, 24, 48, 0.78) 0%,
+    rgba(4, 24, 48, 0.58) 48%,
+    rgba(4, 24, 48, 0.38) 100%
+  );
+  pointer-events: none;
+}
+.hero-grid,
+.hero-copy,
+.hero-visual,
+.hero-actions,
+.trust-row {
+  position: relative;
+  z-index: 2;
+}
+.hero-copy .eyebrow,
+.hero h1,
+.hero h1 span,
+.hero-copy > p,
+.hero-copy .trust-row span {
+  color: #fff;
+}
+.hero-copy .eyebrow span {
+  background: #fff;
+}
+.hero-copy .trust-row {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.hero-copy .btn-outline {
+  background: rgba(255, 255, 255, 0.94);
+}
+.hero-visual {
+  min-height: 300px;
+}
+.hero-status {
+  bottom: 0;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    min-height: auto;
+  }
+  .hero-video {
+    object-position: center;
+  }
+  .hero-visual {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-visual {
+    min-height: 225px;
+  }
+}

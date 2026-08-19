@@ -88,7 +88,18 @@
 
     <main>
       <section class="hero" id="home">
-        <div class="hero-bg"></div>
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="assets/videos/Alexis-Hospital-Videos.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-bg" aria-hidden="true"></div>
         <div class="container hero-grid">
           <div class="hero-copy reveal">
             <div class="eyebrow">
@@ -125,23 +136,15 @@
             </div>
           </div>
           <div class="hero-visual reveal">
-            <div class="hero-image">
-              <img
-                src="img/Receptionist img.png"
-                alt="Alexis Hospital reception area"
-                fetchpriority="high"
-              />
-              <div class="image-shade"></div>
-              <div class="hero-status">
-                <span class="status-icon"
-                  ><i class="fa-solid fa-shield-heart"></i
-                ></span>
-                <div>
-                  <small>Emergency Department</small
-                  ><strong>Ready 24 hours, every day</strong>
-                </div>
-                <span class="online-dot"></span>
+            <div class="hero-status">
+              <span class="status-icon"
+                ><i class="fa-solid fa-shield-heart"></i
+              ></span>
+              <div>
+                <small>Emergency Department</small
+                ><strong>Ready 24 hours, every day</strong>
               </div>
+              <span class="online-dot"></span>
             </div>
             <div class="floating-card care-card">
               <span><i class="fa-solid fa-user-doctor"></i></span>
@@ -150,9 +153,9 @@
                 ><small>When every minute matters</small>
               </div>
             </div>
-            <div class="floating-card response-card">
+            <!-- <div class="floating-card response-card">
               <strong>&lt; 10 min</strong><small>Emergency response</small>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="hero-wave"></div>
@@ -211,11 +214,11 @@
         <div class="container about-grid">
           <div class="about-visual reveal">
             <div class="about-image">
-              <img
+              <!-- <img
                 src="img/C1 img.png"
                 alt="Alexis Hospital branded reception wall"
                 loading="lazy"
-              />
+              /> -->
             </div>
             <div class="experience-seal">
               <strong>24×7</strong><span>Care &<br />Commitment</span>
