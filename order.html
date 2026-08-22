@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Place your Alexis Hospital care package order through WhatsApp.">
+  <meta name="theme-color" content="#902775">
+  <title>Place Order | Alexis Hospital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="product.css">
+  <link rel="stylesheet" href="order.css">
+  <script src="product-data.js" defer></script>
+  <script src="order.js" defer></script>
+</head>
+<body>
+  <div class="loader" aria-hidden="true"><div class="loader-mark"><img src="img/Renew logo.jpeg" alt="Loading" style="height: 48px; width: auto;"></div></div>
+  <div class="scroll-progress"></div>
+  <header class="site-header">
+    <div class="topbar"><div class="container topbar-inner"><span><i class="fa-solid fa-location-dot"></i> V.P. Naka, Bhiwandi, Thane</span><div><span><i class="fa-regular fa-clock"></i> Open 24 hours</span><a href="mailto:alexishospitalbhiwandi@gmail.com"><i class="fa-regular fa-envelope"></i> Email us</a></div></div></div>
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="logo" href="index.html" aria-label="Alexis Hospital home"><img src="img/selected/Renew logo.jpeg" alt="Alexis Hospital Logo" style="height: 42px; width: auto;"></a>
+      <div class="nav-menu" id="navMenu"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#doctors">Doctors</a><a href="index.html#services">Services</a><a href="index.html#facilities">Facilities</a><a href="index.html#insurance">Insurance</a><a href="cosmetology.html">Cosmetology</a><a href="index.html#testimonials">Testimonials</a><a href="index.html#contact">Contact</a></div>
+      <div class="nav-actions"><a class="btn btn-emergency btn-small" href="tel:+918668423088"><i class="fa-solid fa-phone"></i><span>Emergency Call</span></a><button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    </nav>
+  </header>
+  <main class="order-main">
+    <div class="container">
+      <a class="order-back" href="product.html"><i class="fa-solid fa-arrow-left"></i> Back to Products</a>
+      <div id="productNotFound" class="order-not-found" hidden><h1>Product Not Found</h1><p>The requested care package is unavailable.</p><a class="btn btn-primary" href="product.html">Back to Products</a></div>
+      <div id="orderContent" class="order-layout" hidden>
+        <section class="order-product-panel" aria-labelledby="productName">
+          <div class="order-gallery"><div class="order-image-wrap"><img id="productImage" alt=""></div><div id="productThumbnails" class="product-thumbnails" aria-label="Product images"></div></div>
+          <div class="order-product-copy"><span id="productCategory" class="product-category"></span><h1 id="productName"></h1><p id="productDescription"></p><strong id="productPrice" class="order-price"></strong></div>
+        </section>
+        <section class="order-form-panel" aria-labelledby="orderHeading">
+          <div class="order-heading"><span class="section-tag">WhatsApp Checkout</span><h2 id="orderHeading">Complete your order</h2><p>Share your details and we will confirm availability on WhatsApp.</p></div>
+          <form id="orderForm" novalidate>
+            <fieldset><legend>Quantity</legend><div class="quantity-control"><button type="button" id="decreaseQuantity" aria-label="Decrease quantity">−</button><input type="number" id="quantity" value="1" min="1" step="1" inputmode="numeric" aria-label="Quantity"><button type="button" id="increaseQuantity" aria-label="Increase quantity">+</button></div></fieldset>
+            <fieldset><legend>Customer Information</legend><div class="order-form-grid"><label for="customerName">Full Name *<input type="text" id="customerName" name="customerName" placeholder="Full Name" autocomplete="name" required></label><label for="customerPhone">Mobile Number *<input type="tel" id="customerPhone" name="customerPhone" placeholder="10-digit mobile number" pattern="[0-9+() -]{10,}" autocomplete="tel" required></label><label for="customerArea">Area *<input type="text" id="customerArea" name="customerArea" placeholder="Area" autocomplete="address-level2" required></label><label class="full-width" for="customerLocation">Location / Address *<textarea id="customerLocation" name="customerLocation" placeholder="Complete location / address" autocomplete="street-address" required></textarea></label><label class="full-width" for="customerMessage">Additional Message<textarea id="customerMessage" name="customerMessage" placeholder="Anything we should know?" rows="3"></textarea></label></div></fieldset>
+            <p id="orderError" class="order-error" role="alert" aria-live="polite"></p>
+            <div class="order-summary"><h2>Order Summary</h2><div><span>Product</span><strong id="summaryProduct"></strong></div><div><span>Price</span><strong id="summaryPrice"></strong></div><div><span>Quantity</span><strong id="summaryQuantity"></strong></div><div class="summary-total"><span>Total</span><strong id="summaryTotal"></strong></div></div>
+            <button class="btn btn-primary whatsapp-order-btn" type="submit"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><div class="container footer-grid"><div class="footer-brand"><a class="logo light-logo" href="index.html"><img src="img/selected/Renew logo.jpeg" alt="Alexis Hospital Logo" style="height: 42px; width: auto;"></a><p>Dependable emergency, critical and multi-speciality care for Bhiwandi and nearby communities.</p><div class="socials"><a href="https://www.instagram.com/renewplusbhiwandi" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/918080697661" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div><div><h4>Quick Links</h4><a href="index.html#about">About Hospital</a><a href="index.html#doctors">Our Doctors</a><a href="index.html#facilities">Facilities</a><a href="index.html#contact">Contact Us</a></div><div><h4>Our Services</h4><a href="index.html#services">Emergency Care</a><a href="index.html#services">Critical Care ICU</a><a href="index.html#services">General Medicine</a><a href="cosmetology.html">Cosmetology</a></div><div class="footer-emergency"><h4>Emergency Helpline</h4><a class="footer-phone" href="tel:+918668423088"><i class="fa-solid fa-phone-volume"></i><span><small>Available 24 hours</small>+91 86684 23088</span></a><p><i class="fa-solid fa-location-dot"></i> V.P. Naka, Bhiwandi,<br>Thane – 421302</p></div></div><div class="container footer-bottom"><span>© <span id="year"></span> Alexis Hospital &amp; Critical Care Centre. All rights reserved.</span><span>Healthcare with skill, safety and compassion.</span></div></footer>
+</body>
+</html>
