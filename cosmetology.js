@@ -1,20 +1,21 @@
-const $ = (selector, context = document) => context.querySelector(selector);
-const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
+(() => {
+const cosQuery = (selector, context = document) => context.querySelector(selector);
+const cosQueryAll = (selector, context = document) => [...context.querySelectorAll(selector)];
 
-const menu = $('#navMenu');
-const toggle = $('.menu-toggle');
-const navLinks = $$('.nav-menu a');
-const loader = $('.loader');
-const revealElements = $$('.reveal');
-const backTop = $('.back-top');
+const menu = cosQuery('#navMenu');
+const toggle = cosQuery('.menu-toggle');
+const navLinks = cosQueryAll('.nav-menu a');
+const loader = cosQuery('.loader');
+const revealElements = cosQueryAll('.reveal');
+const backTop = cosQuery('.back-top');
 
-const appointmentForm = $('#cosAppointmentForm');
-const fullNameInput = $('#cos-name');
-const phoneInput = $('#cos-phone');
-const serviceSelect = $('#cos-department');
-const preferredDateInput = $('#cos-date');
-const messageInput = $('#cos-message');
-const yearSpan = $('#year');
+const appointmentForm = cosQuery('#cosAppointmentForm');
+const fullNameInput = cosQuery('#cos-name');
+const phoneInput = cosQuery('#cos-phone');
+const serviceSelect = cosQuery('#cos-department');
+const preferredDateInput = cosQuery('#cos-date');
+const messageInput = cosQuery('#cos-message');
+const yearSpan = cosQuery('#year');
 
 function setMinimumDate() {
   if (!preferredDateInput) return;
@@ -56,6 +57,107 @@ function handleFaqToggle(event) {
   const button = event.currentTarget;
   const faqItem = button.closest('.cos-faq-item');
   faqItem.classList.toggle('open');
+}
+
+function initPatientStories() {
+  const modal = cosQuery('#patientVideoModal');
+  if (!modal) return;
+
+  const modalTitle = cosQuery('#patientVideoModalTitle');
+  const modalBody = cosQuery('#patientVideoModalBody');
+  const closeButton = cosQuery('.patient-video-modal__close', modal);
+  let trigger;
+  let instagramScriptPromise;
+
+  function loadInstagramEmbed() {
+    if (window.instgrm) return Promise.resolve(window.instgrm);
+    if (instagramScriptPromise) return instagramScriptPromise;
+
+    instagramScriptPromise = new Promise((resolve, reject) => {
+      const existingScript = document.querySelector('script[src="https://www.instagram.com/embed.js"]');
+      const script = existingScript || document.createElement('script');
+      script.onload = () => window.instgrm
+        ? resolve(window.instgrm)
+        : reject(new Error('Instagram embed unavailable'));
+      script.onerror = () => reject(new Error('Instagram embed failed to load'));
+      if (!existingScript) {
+        script.src = 'https://www.instagram.com/embed.js';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+    });
+    return instagramScriptPromise;
+  }
+
+  function showFallback(url) {
+    modalBody.replaceChildren();
+    const fallback = document.createElement('div');
+    fallback.className = 'patient-video-modal__fallback';
+    fallback.innerHTML = '<i class="fa-brands fa-instagram" aria-hidden="true"></i><h3>Watch this patient story on Instagram</h3><p>Instagram could not load this story here. You can continue watching it on Instagram.</p>';
+    const link = document.createElement('a');
+    link.className = 'btn btn-primary';
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.innerHTML = '<i class="fa-brands fa-instagram"></i> Open on Instagram';
+    fallback.appendChild(link);
+    modalBody.appendChild(fallback);
+  }
+
+  function closeModal() {
+    modalBody.replaceChildren();
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('video-modal-open');
+    if (trigger) trigger.focus();
+  }
+
+  function openModal(frame) {
+    const card = frame.closest('.patient-video-card');
+    const url = frame.dataset.instagramUrl;
+    trigger = frame;
+    modalTitle.textContent = card.querySelector('h3').textContent;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('video-modal-open');
+    closeButton.focus();
+
+    const embed = document.createElement('blockquote');
+    embed.className = 'instagram-media';
+    embed.dataset.instgrmPermalink = url;
+    embed.dataset.instgrmVersion = '14';
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = 'Watch this patient story on Instagram';
+    embed.appendChild(link);
+    modalBody.replaceChildren(embed);
+
+    loadInstagramEmbed()
+      .then((instagram) => {
+        if (modal.classList.contains('is-open') && modalBody.contains(embed)) {
+          instagram.Embeds.process();
+        }
+      })
+      .catch(() => {
+        if (modal.classList.contains('is-open')) showFallback(url);
+      });
+  }
+
+  cosQueryAll('.patient-video-frame[data-instagram-url]').forEach((frame) => {
+    frame.addEventListener('click', () => openModal(frame));
+    frame.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openModal(frame);
+      }
+    });
+  });
+  cosQueryAll('[data-modal-close]', modal).forEach((control) => control.addEventListener('click', closeModal));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
 }
 
 function sendWhatsAppMessage(event) {
@@ -112,7 +214,7 @@ function initPage() {
     if (e.key === 'Escape') closeMenu();
   });
 
-  const faqButtons = $$('.cos-faq-trigger');
+  const faqButtons = cosQueryAll('.cos-faq-trigger');
   faqButtons.forEach(button => button.addEventListener('click', handleFaqToggle));
 
   if (backTop) {
@@ -120,6 +222,8 @@ function initPage() {
   }
 
   if (appointmentForm) appointmentForm.addEventListener('submit', sendWhatsAppMessage);
+  initPatientStories();
 }
 
 initPage();
+})();

@@ -883,7 +883,33 @@ h2 span {
   position: absolute;
   inset: 0;
   z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: linear-gradient(145deg, rgba(63, 19, 53, 0.34), rgba(144, 39, 117, 0.76));
   cursor: pointer;
+  transition: background 0.25s ease;
+}
+.patient-video-launch > i:first-child {
+  font-size: 34px;
+}
+.patient-video-launch > i:last-child {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--primary-color);
+  background: #fff;
+  font-size: 11px;
+}
+.patient-video-card:hover .patient-video-launch {
+  background: linear-gradient(145deg, rgba(63, 19, 53, 0.42), rgba(144, 39, 117, 0.9));
 }
 .patient-video-frame:focus-visible .patient-video-launch {
   outline: 3px solid var(--accent-color);
@@ -896,16 +922,6 @@ h2 span {
   inset: auto 0 0;
   height: 80px;
   background: linear-gradient(transparent, rgba(37, 16, 31, 0.14));
-}
-.patient-video-frame .instagram-media {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  height: 100% !important;
-  min-height: 430px !important;
-  margin: 0 !important;
-  border: 0 !important;
-  background: transparent !important;
 }
 .patient-play-pulse {
   pointer-events: none;
@@ -1109,96 +1125,52 @@ h2 span {
   position: relative;
   display: grid;
   place-items: center;
-  /* height: min(80vh, 860px); */
+  min-height: 360px;
+  max-height: 76vh;
+  overflow: auto;
   border-radius: 17px;
-  overflow: hidden;
-  background: #050405;
+  background: #fff;
 }
-.patient-video-modal__player {
-  /* width: 100%; */
-  height: 400px;
-  display: block;
-  object-fit: contain;
-  background: #050405;
+.patient-video-modal__header {
+  padding: 12px 14px 16px;
 }
-.patient-video-modal__overlay {
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-  inset: auto 0 0;
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 15px;
-  padding: 52px 22px 19px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
-}
-.patient-video-modal__overlay h2 {
-  max-width: 70%;
-  color: #fff;
-  font: 800 19px/1.25 "Plus Jakarta Sans";
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
-}
-.patient-video-modal__tools {
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.patient-video-modal__tools label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 7px 9px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 9px;
-  background: rgba(20, 11, 19, 0.68);
-  color: rgba(255, 255, 255, 0.82);
+.patient-video-modal__header p {
+  margin-bottom: 4px;
+  color: var(--accent-color);
   font-size: 10px;
-  font-weight: 700;
-  backdrop-filter: blur(8px);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
-.patient-video-modal__tools select {
-  border: 0;
-  outline: 0;
+.patient-video-modal__header h2 {
+  padding-right: 46px;
   color: #fff;
-  background: transparent;
-  font: inherit;
-  cursor: pointer;
+  font: 800 20px/1.25 "Plus Jakarta Sans";
 }
-.patient-video-modal__tools select option {
+.patient-video-modal__media .instagram-media {
+  width: min(100%, 540px) !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+.patient-video-modal__fallback {
+  max-width: 430px;
+  padding: 38px 30px;
+  text-align: center;
   color: var(--ink);
 }
-.patient-video-modal__tools button {
-  width: 34px;
-  height: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  border-radius: 9px;
-  color: #fff;
-  background: rgba(20, 11, 19, 0.68);
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-}
-.patient-video-modal__tools button:hover {
+.patient-video-modal__fallback > i {
   color: var(--primary-color);
-  background: #fff;
+  font-size: 38px;
 }
-.patient-video-modal__description {
-  margin: 12px 8px 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 12px;
+.patient-video-modal__fallback h3 {
+  margin-top: 14px;
+  font: 800 20px/1.25 "Plus Jakarta Sans";
 }
-.patient-video-modal__profile {
-  display: flex;
-  width: max-content;
-  margin: 15px 8px 3px;
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.65);
-}
-.patient-video-modal__profile:hover {
-  color: var(--primary-color);
-  border-color: #fff;
-  background: #fff;
+.patient-video-modal__fallback p {
+  margin: 9px 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
 }
 body.video-modal-open {
   overflow: hidden;
@@ -1227,8 +1199,7 @@ body.video-modal-open {
   .patient-video-grid {
     grid-template-columns: 1fr;
   }
-  .patient-video-frame,
-  .patient-video-frame .instagram-media {
+  .patient-video-frame {
     height: 410px !important;
     min-height: 410px !important;
   }
@@ -1265,24 +1236,9 @@ body.video-modal-open {
     border-radius: 21px;
   }
   .patient-video-modal__media {
-    height: min(76vh, 720px);
+    min-height: 300px;
+    max-height: 72vh;
     border-radius: 15px;
-  }
-  .patient-video-modal__overlay {
-    padding: 44px 14px 13px;
-  }
-  .patient-video-modal__overlay h2 {
-    font-size: 15px;
-  }
-  .patient-video-modal__tools label {
-    display: none;
-  }
-  .patient-video-modal__description {
-    margin: 10px 6px 0;
-    font-size: 11px;
-  }
-  .patient-video-modal__profile {
-    margin: 13px 6px 3px;
   }
 }
 .section-heading {

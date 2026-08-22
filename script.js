@@ -136,19 +136,46 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-// Patient testimonial videos stay in an on-site modal; Instagram is only opened from the profile action.
+// Patient stories are displayed through Instagram's official embed inside an on-site modal.
 const videoModal=$('#patientVideoModal');
 if(videoModal){
-  const videoPlayer=$('#patientVideoPlayer');
   const modalTitle=$('#patientVideoModalTitle');
-  const modalDescription=$('#patientVideoDescription');
-  const speedControl=$('#patientVideoSpeed');
-  const fullscreenControl=$('#patientVideoFullscreen');
+  const modalBody=$('#patientVideoModalBody');
+  const closeButton=$('.patient-video-modal__close',videoModal);
   let videoTrigger=null;
+  let instagramScriptPromise=null;
+  const loadInstagramEmbed=()=>{
+    if(window.instgrm) return Promise.resolve(window.instgrm);
+    if(instagramScriptPromise) return instagramScriptPromise;
+    instagramScriptPromise=new Promise((resolve,reject)=>{
+      const existingScript=document.querySelector('script[src="https://www.instagram.com/embed.js"]');
+      const script=existingScript||document.createElement('script');
+      script.onload=()=>window.instgrm ? resolve(window.instgrm) : reject(new Error('Instagram embed unavailable'));
+      script.onerror=()=>reject(new Error('Instagram embed failed to load'));
+      if(!existingScript){
+        script.src='https://www.instagram.com/embed.js';
+        script.async=true;
+        document.head.appendChild(script);
+      }
+    });
+    return instagramScriptPromise;
+  };
+  const showInstagramFallback=url=>{
+    modalBody.replaceChildren();
+    const fallback=document.createElement('div');
+    fallback.className='patient-video-modal__fallback';
+    fallback.innerHTML='<i class="fa-brands fa-instagram" aria-hidden="true"></i><h3>Watch this patient story on Instagram</h3><p>Instagram could not load this story here. You can continue watching it on Instagram.</p>';
+    const link=document.createElement('a');
+    link.className='btn btn-primary';
+    link.href=url;
+    link.target='_blank';
+    link.rel='noopener';
+    link.innerHTML='<i class="fa-brands fa-instagram"></i> Open on Instagram';
+    fallback.appendChild(link);
+    modalBody.appendChild(fallback);
+  };
   const closePatientVideo=()=>{
-    videoPlayer.pause();
-    videoPlayer.removeAttribute('src');
-    videoPlayer.load();
+    modalBody.replaceChildren();
     videoModal.classList.remove('is-open');
     videoModal.setAttribute('aria-hidden','true');
     document.body.classList.remove('video-modal-open');
@@ -159,27 +186,31 @@ if(videoModal){
     const title=card.querySelector('h3').textContent;
     videoTrigger=frame;
     modalTitle.textContent=title;
-    modalDescription.textContent=frame.dataset.videoDescription;
-    videoPlayer.src=frame.dataset.videoSrc;
-    videoPlayer.playbackRate=1;
-    speedControl.value='1';
     videoModal.classList.add('is-open');
     videoModal.setAttribute('aria-hidden','false');
     document.body.classList.add('video-modal-open');
-    videoPlayer.play().catch(()=>{});
-    $('.patient-video-modal__close',videoModal).focus();
+    closeButton.focus();
+    const url=frame.dataset.instagramUrl;
+    const embed=document.createElement('blockquote');
+    embed.className='instagram-media';
+    embed.dataset.instgrmPermalink=url;
+    embed.dataset.instgrmVersion='14';
+    const link=document.createElement('a');
+    link.href=url;
+    link.target='_blank';
+    link.rel='noopener';
+    link.textContent='Watch this patient story on Instagram';
+    embed.appendChild(link);
+    modalBody.replaceChildren(embed);
+    loadInstagramEmbed()
+      .then(instagram=>{ if(videoModal.classList.contains('is-open')&&modalBody.contains(embed)) instagram.Embeds.process(); })
+      .catch(()=>{ if(videoModal.classList.contains('is-open')) showInstagramFallback(url); });
   };
-  $$('.patient-video-frame[data-video-src]').forEach(frame=>{
+  $$('.patient-video-frame[data-instagram-url]').forEach(frame=>{
     frame.addEventListener('click',()=>openPatientVideo(frame));
     frame.addEventListener('keydown',e=>{
       if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openPatientVideo(frame); }
     });
-  });
-  speedControl.addEventListener('change',()=>{ videoPlayer.playbackRate=Number(speedControl.value); });
-  fullscreenControl.addEventListener('click',()=>{
-    const fullscreenTarget=videoPlayer;
-    if(document.fullscreenElement) document.exitFullscreen();
-    else if(fullscreenTarget.requestFullscreen) fullscreenTarget.requestFullscreen();
   });
   $$('[data-modal-close]',videoModal).forEach(control=>control.addEventListener('click',closePatientVideo));
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&videoModal.classList.contains('is-open')) closePatientVideo(); });
