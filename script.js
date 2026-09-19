@@ -129,6 +129,21 @@ $('#appointmentForm').addEventListener('submit',e=>{
     btn.disabled=false;
   }
 });
+const nameInput = document.querySelector('#appointmentForm input[name="name"]');
+
+nameInput.addEventListener('input', () => {
+  nameInput.value = nameInput.value
+    .replace(/[^a-zA-Z\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/(^|\s)\S/g, letter => letter.toUpperCase());
+});
+const phoneInput = document.querySelector('#appointmentForm input[name="phone"]');
+
+phoneInput.addEventListener('input', () => {
+  phoneInput.value = phoneInput.value
+    .replace(/\D/g, '')
+    .slice(0, 10);
+});
 
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&menu.classList.contains('open')){
