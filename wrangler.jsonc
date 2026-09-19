@@ -6,6 +6,11 @@
     "enabled": true
   },
   "assets": {
-    "directory": "./dist"
+    "directory": ".",
+    "exclude": [
+      ".git/**",
+      "node_modules/**",
+      "wrangler.jsonc"
+    ]
   }
 }
